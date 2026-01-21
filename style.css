@@ -26,6 +26,7 @@
   box-shadow: 0 0 15px rgba(186, 85, 211, 0.6);
 }
 .load-more {
+  position:absolute;
   color: aliceblue;
   border-radius: 15px;
   padding: 13px 22px;
@@ -35,6 +36,10 @@
   margin: 20px auto;
   cursor: pointer;
   transition: 0.3s ease-in-out;
+  right:10px;
+  position: fixed;
+  bottom: 10px;
+  z-index: 1;
 }
 .load-more:hover {
   background: seagreen;
@@ -113,6 +118,8 @@
   font-size: 1.1rem;
   text-transform: capitalize;
   letter-spacing: 2px;
+      display: flex;
+    justify-content: center;
 }
 .card {
   perspective: 1000px;
@@ -148,4 +155,22 @@
   gap: 10px;
   font-size: 18px;
   transform: rotateY(180deg);
+}
+.text-animation {
+  font-size:37px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.text::after {
+  content: "|";
+  margin-left: 5px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
 }

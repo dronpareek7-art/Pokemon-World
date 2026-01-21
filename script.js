@@ -18,7 +18,6 @@ async function getpok() {
   }
 }
 getpok();
-
 async function displaydata(data) {
   data.results.forEach(async (item) => {
     try {
@@ -68,3 +67,26 @@ loadMore.addEventListener("click",()=>{
   getpok()
 })
 
+
+
+function textanimation(){
+const texts = [
+"Welcome to Pokémon World",
+"Discover Amazing Pokémons",
+"Catch Them All"
+
+];
+let t= 0,c =0,del = false;
+const el = document.querySelector(".text")
+setInterval(()=>{
+  del ? c--:c++
+  el.textContent = texts[t].slice(0,c);
+  if(c===texts[t].length +1) del = true;
+  if(c===0 && del){
+    del = false;
+    t= (t+1)%texts.length
+  }
+},120)
+
+}
+textanimation()
