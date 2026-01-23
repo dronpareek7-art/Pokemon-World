@@ -3,41 +3,56 @@
   padding: 0;
   box-sizing: border-box;
 }
-.input {
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 600px;
+  margin: 0 auto;
+}
+
+.input,
+select {
   font-size: 17px;
   border-radius: 15px;
   padding: 15px 17px;
   width: 240px;
-  margin: 25px auto;
-  display: flex;
+  margin: 10px auto;
   text-align: center;
   background: rgba(128, 0, 128, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: none;
   color: #ffffff;
   backdrop-filter: blur(10px);
 }
+
 .input::placeholder {
   color: rgba(255, 255, 255, 0.7);
   font-size: 16px;
 }
-.input:focus {
+.input:focus,
+select:focus {
   outline: none;
+  transition: 0.3s all;
+  transform: scale(1.1);
   background: rgba(186, 85, 211, 0.35);
   box-shadow: 0 0 15px rgba(186, 85, 211, 0.6);
 }
 .load-more {
-  position: absolute;
-  color: aliceblue;
   border-radius: 15px;
   padding: 13px 22px;
-  background: darkgreen;
-  width: 126px;
+  color: #003300;
+  background: #00ff7f;
+  box-shadow:
+    0 0 12px #00ff7f,
+    0 0 30px rgba(0, 255, 127, 0.6);
+  width: 125px;
   text-align: center;
-  margin: 20px auto;
+  margin: 40px auto;
   cursor: pointer;
   transition: 0.3s ease-in-out;
   right: 10px;
-  position: fixed;
+  position: sticky;
   bottom: 10px;
   z-index: 1;
 }
@@ -107,11 +122,9 @@
 .card:hover {
   transform: translateY(-14px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-  /* background: linear-gradient(135deg, #fbc2eb, #a6c1ee); */
 }
 .card:hover .pok-image {
   transform: scale(1.08);
-  /* filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.8)); */
 }
 
 .namepok {
@@ -147,7 +160,6 @@
 }
 
 .card-back {
-  /* background: linear-gradient(135deg, #667eea, #764ba2); */
   color: white;
   display: flex;
   flex-direction: column;
@@ -162,7 +174,7 @@
   font-weight: bold;
   color: white;
   text-align: center;
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 .text::after {
@@ -180,5 +192,31 @@
   25%,
   75% {
     opacity: 0;
+  }
+}
+
+
+
+                    
+@media (max-width: 555px) {
+  .container {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px; 
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 16px; 
+  }
+  .input {
+    width: 90%;
+    max-width: 300px;
+  }
+  select {
+    width: 50%;
+    max-width: 250px;
   }
 }

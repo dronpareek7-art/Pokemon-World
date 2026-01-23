@@ -1,6 +1,7 @@
 let wrapper = document.querySelector(".wrapper");
 let input = document.querySelector(".input");
 let loadMore = document.querySelector(".load-more");
+let select = document.querySelector("select");
 
 let limit = 20;
 let offset = 0;
@@ -86,6 +87,20 @@ input.addEventListener("keyup", (e) => {
   );
 
   filtered.forEach((poke) => displaypokemon(poke));
+});
+
+select.addEventListener("change", (e) => {
+  let value = e.target.value.toLowerCase();
+  wrapper.innerHTML = "";
+
+  let filteredPokemon = searchPokemon.filter((pokemon) => {
+    let searchbyname = pokemon.name.includes(value);
+    let searchbytype = pokemon.types.some((t) => {
+      return t.type.name.includes(value);
+    });
+    return searchbyname || searchbytype;
+  });
+  filteredPokemon.forEach(displaypokemon);
 });
 
 function textanimation() {
