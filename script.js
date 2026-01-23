@@ -8,7 +8,7 @@ let offset = 0;
 
 let searchPokemon = [];
 
-async function getpok() {
+async function getpok() { 
   try {
     let response = await fetch(
       `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`,
@@ -85,8 +85,13 @@ input.addEventListener("keyup", (e) => {
   let filtered = searchPokemon.filter((poke) =>
     poke.name.includes(e.target.value.toLowerCase()),
   );
+    if(filtered.length>0){
+    filtered.forEach(displaypokemon)
+  }
+  else{
+    wrapper.innerHTML = `<p class = "error-pokemon"> Error : No Pokémon found</p>`
+  }
 
-  filtered.forEach((poke) => displaypokemon(poke));
 });
 
 select.addEventListener("change", (e) => {
@@ -100,7 +105,12 @@ select.addEventListener("change", (e) => {
     });
     return searchbyname || searchbytype;
   });
-  filteredPokemon.forEach(displaypokemon);
+  if(filteredPokemon.length>0){
+    filteredPokemon.forEach(displaypokemon)
+  }
+  else{
+    wrapper.innerHTML = `<p class = "error-pokemon"> Error : No Pokémon found</p>`
+  }
 });
 
 function textanimation() {

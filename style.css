@@ -117,6 +117,16 @@ select:focus {
   object-fit: contain;
   cursor: pointer;
   transition: 0.4s ease;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100%{
+    transform: translateY(0);
+
+  }
+  50%{
+    transform: translateY(-10px);
+  }
 }
 
 .card:hover {
@@ -181,6 +191,11 @@ select:focus {
   content: "|";
   margin-left: 5px;
   animation: blink 1s infinite;
+}
+.error-pokemon{
+  font-size:30px;
+  font-weight: bold;
+  color: white;
 }
 
 @keyframes blink {
