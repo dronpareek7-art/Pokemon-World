@@ -33,7 +33,7 @@ select {
 .input:focus,
 select:focus {
   outline: none;
-  transition: 0.3s all;
+  transition: 0.3s all ease;
   transform: scale(1.1);
   background: rgba(186, 85, 211, 0.35);
   box-shadow: 0 0 15px rgba(186, 85, 211, 0.6);

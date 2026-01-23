@@ -8,7 +8,7 @@ let offset = 0;
 
 let searchPokemon = [];
 
-async function getpok() { 
+async function getpok() {
   try {
     let response = await fetch(
       `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`,
@@ -22,18 +22,32 @@ async function getpok() {
 }
 getpok();
 
+// async function display(data) {
+//   data.results.forEach(async (item) => {
+//     try {
+//       let result = await fetch(item.url);
+//       let details = await result.json();
+//       console.log(details);
+//       searchPokemon.push(details);
+//       displaypokemon(details);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   });
+// }
+
 async function display(data) {
-  data.results.forEach(async (item) => {
-    try {
-      let result = await fetch(item.url);
-      let details = await result.json();
-      console.log(details);
-      searchPokemon.push(details);
-      displaypokemon(details);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+  try {
+    let promises = data.results.map((item) => {
+      return fetch(item.url).then((res) => res.json());
+    });
+
+    let allpokemons = await Promise.all(promises);
+    searchPokemon.push(...allpokemons);
+    allpokemons.forEach(displaypokemon);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function displaypokemon(details) {
@@ -47,8 +61,8 @@ function displaypokemon(details) {
   back.classList.add("card-back");
 
   back.innerHTML = `
-      <p>Weight: ${details.weight}kg</p>
-      <p>Height: ${details.height}m</p>
+      <p>Weight: ${details.weight/10}kg</p>
+      <p>Height: ${details.height/10}m</p>
       <p>Ability: ${details.abilities[0].ability.name}</p>
       <p>Type: ${details.types[0].type.name}</p>
       <p>Moves: ${details.moves[0].move.name}</p>
@@ -85,13 +99,11 @@ input.addEventListener("keyup", (e) => {
   let filtered = searchPokemon.filter((poke) =>
     poke.name.includes(e.target.value.toLowerCase()),
   );
-    if(filtered.length>0){
-    filtered.forEach(displaypokemon)
+  if (filtered.length > 0) {
+    filtered.forEach(displaypokemon);
+  } else {
+    wrapper.innerHTML = `<p class = "error-pokemon"> Error : No Pokémon found</p>`;
   }
-  else{
-    wrapper.innerHTML = `<p class = "error-pokemon"> Error : No Pokémon found</p>`
-  }
-
 });
 
 select.addEventListener("change", (e) => {
@@ -105,11 +117,10 @@ select.addEventListener("change", (e) => {
     });
     return searchbyname || searchbytype;
   });
-  if(filteredPokemon.length>0){
-    filteredPokemon.forEach(displaypokemon)
-  }
-  else{
-    wrapper.innerHTML = `<p class = "error-pokemon"> Error : No Pokémon found</p>`
+  if (filteredPokemon.length > 0) {
+    filteredPokemon.forEach(displaypokemon);
+  } else {
+    wrapper.innerHTML = `<p class = "error-pokemon"> Error : No Pokémon found</p>`;
   }
 });
 
