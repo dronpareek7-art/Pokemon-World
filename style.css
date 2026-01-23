@@ -40,13 +40,13 @@ select:focus {
 }
 .load-more {
   border-radius: 15px;
-  padding: 13px 22px;
+  padding: 13px 30px;
   color: #003300;
   background: #00ff7f;
   box-shadow:
     0 0 12px #00ff7f,
     0 0 30px rgba(0, 255, 127, 0.6);
-  width: 125px;
+  width: 150px;
   text-align: center;
   margin: 40px auto;
   cursor: pointer;
@@ -195,21 +195,15 @@ select:focus {
   }
 }
 
-
-
-                    
 @media (max-width: 555px) {
   .container {
     display: flex;
-    gap: 18px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 15px;
-    max-width: 600px; 
     width: 100%;
     margin: 0 auto;
-    padding: 0 16px; 
+    padding: 0 16px;
   }
   .input {
     width: 90%;
